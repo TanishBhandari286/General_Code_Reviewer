@@ -1,0 +1,39 @@
+{
+  "name": "github-automation-hub",
+  "version": "2.0.0",
+  "description": "A modern dark mode web application to configure GitHub automation workflows with n8n. Features secure token storage, multiple repository management, and real-time webhook integration.",
+  "main": "src/index.html",
+  "scripts": {
+    "start": "python3 -m http.server 3000 --directory src",
+    "start:py": "python -m http.server 3000 --directory src",
+    "serve": "python3 -m http.server 3000 --directory src",
+    "open": "open http://localhost:3000",
+    "build": "echo 'No build process needed for static site'",
+    "test": "echo 'Tests not yet implemented'"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "keywords": [
+    "github",
+    "webhook",
+    "n8n",
+    "automation",
+    "dark-mode",
+    "modern-ui",
+    "token-storage",
+    "repository-management"
+  ],
+  "author": "GitHub Automation Hub",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "."
+  },
+  "bugs": {
+    "url": "."
+  },
+  "homepage": "."
+}

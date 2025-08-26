@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Automation Hub</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="background-pattern"></div>
+    
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <i class="fab fa-github"></i>
+                <span>GitHub Automation Hub</span>
+            </div>
+            <div class="token-status" id="token-status">
+                <i class="fas fa-key"></i>
+                <span id="token-indicator">No Token Stored</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="hero-section">
+                <h1 class="hero-title">
+                    <i class="fas fa-rocket"></i>
+                    Automate Your GitHub Workflow
+                </h1>
+                <p class="hero-subtitle">
+                    Connect your GitHub repositories with n8n automation workflows. 
+                    Securely store your token and manage multiple repositories with ease.
+                </p>
+            </div>
+
+            <div class="form-container">
+                <div class="form-header">
+                    <h2><i class="fas fa-cogs"></i> Setup Automation</h2>
+                    <p>Configure your GitHub token and select repositories to automate</p>
+                </div>
+
+                <form id="github-form" class="github-form">
+                    <!-- Token Section -->
+                    <div class="form-section">
+                        <div class="section-header">
+                            <h3><i class="fas fa-shield-alt"></i> GitHub Token</h3>
+                            <button type="button" id="clear-token" class="clear-btn" title="Clear stored token">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="input-group">
+                            <div class="input-wrapper">
+                                <input 
+                                    type="password" 
+                                    id="github-token" 
+                                    name="github-token" 
+                                    placeholder="ghp_xxxxxxxxxxxxxxxxxxxx"
+                                    class="form-input"
+                                >
+                                <button type="button" id="toggle-token" class="toggle-btn">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <div class="input-help">
+                                <i class="fas fa-info-circle"></i>
+                                <span>Your token is stored securely in your browser's local storage</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Repository Section -->
+                    <div class="form-section">
+                        <div class="section-header">
+                            <h3><i class="fas fa-code-branch"></i> Target Repositories</h3>
+                            <button type="button" id="add-repo" class="add-btn">
+                                <i class="fas fa-plus"></i> Add Repository
+                            </button>
+                        </div>
+                        
+                        <div id="repo-container" class="repo-container">
+                            <div class="repo-input-group">
+                                <div class="input-wrapper">
+                                    <input 
+                                        type="text" 
+                                        name="repo-url" 
+                                        placeholder="https://github.com/username/repository"
+                                        class="form-input repo-input"
+                                        required
+                                    >
+                                    <button type="button" class="remove-repo-btn" title="Remove repository">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Submit Section -->
+                    <div class="submit-section">
+                        <button type="submit" class="submit-btn" id="submit-btn">
+                            <i class="fas fa-paper-plane"></i>
+                            <span>Start Automation</span>
+                            <div class="loading-spinner" id="loading-spinner"></div>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Status Messages -->
+            <div id="status-messages" class="status-messages"></div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 GitHub Automation Hub. Built with ❤️ for n8n workflows.</p>
+        </div>
+    </footer>
+
+    <script src="scripts/main.js"></script>
+    <script src="components/form.js"></script>
+</body>
+</html>
