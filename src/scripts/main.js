@@ -4,9 +4,12 @@
 // ================
 // Set your n8n webhook URL here before using the application
 const WEBHOOK_CONFIG = {
-    url: 'https://n8n.macandcode.cloud/webhook/06066ccf-62c4-49a7-875b-7871b60992d8',
-    // Example: 'https://n8n.yourcompany.com/webhook/github-automation'
-    // Example: 'http://localhost:5678/webhook/github-automation'
+    // REPLACE THIS with your actual webhook URL from n8n:
+    url: 'https://n8n.macandcode.cloud/webhook/YOUR_WEBHOOK_ID', // UPDATE THIS!
+    
+    // After creating a webhook in n8n, you'll get a URL like:
+    // 'https://n8n.macandcode.cloud/webhook/a1b2c3d4-e5f6-7890-abcd-ef1234567890'
+    // Replace YOUR_WEBHOOK_ID above with your actual webhook ID
 };
 
 class GitHubAutomationHub {
@@ -80,14 +83,9 @@ class GitHubAutomationHub {
         const token = e.target.value.trim();
         
         if (token) {
-            // Validate GitHub token format
-            if (this.isValidGitHubToken(token)) {
-                localStorage.setItem(this.storageKey, token);
-                this.updateTokenStatus();
-                this.showStatusMessage('Token saved securely to local storage', 'success');
-            } else {
-                this.showStatusMessage('Invalid GitHub token format', 'warning');
-            }
+            // Only save to localStorage, no validation feedback while typing
+            localStorage.setItem(this.storageKey, token);
+            this.updateTokenStatus();
         } else {
             localStorage.removeItem(this.storageKey);
             this.updateTokenStatus();
@@ -264,13 +262,16 @@ class GitHubAutomationHub {
 
         try {
             // Check if webhook URL is configured
-            if (this.webhookUrl === 'https://your-n8n-instance.com/webhook/github-automation') {
+            if (this.webhookUrl.includes('github-automation') && this.webhookUrl.includes('YOUR_WEBHOOK_ID')) {
                 this.showStatusMessage(
-                    '⚙️ Configuration Required: Please set your n8n webhook URL in src/scripts/main.js (WEBHOOK_CONFIG.url)', 
+                    '⚙️ Configuration Required: Please create a webhook in n8n and update the URL in src/scripts/main.js', 
                     'warning'
                 );
                 return;
             }
+
+            // Test if the webhook URL is reachable
+            console.log('Sending webhook to:', this.webhookUrl);
 
             const response = await fetch(this.webhookUrl, {
                 method: 'POST',
@@ -324,7 +325,19 @@ class GitHubAutomationHub {
                 );
             }
         } catch (error) {
-            this.showStatusMessage(`Network error: ${error.message}`, 'error');
+            console.error('Webhook submission error:', error);
+            
+            if (error.name === 'TypeError' && error.message.includes('fetch')) {
+                this.showStatusMessage(
+                    '🔌 Network Error: Cannot reach the webhook URL. Please check:\n' +
+                    '1. The webhook URL is correct in the configuration\n' +
+                    '2. The n8n workflow with webhook trigger is active\n' +
+                    '3. Your internet connection is working', 
+                    'error'
+                );
+            } else {
+                this.showStatusMessage(`❌ Error: ${error.message}`, 'error');
+            }
         } finally {
             // Hide loading state
             submitBtn.classList.remove('loading');
