@@ -4,12 +4,10 @@
 // ================
 // Set your n8n webhook URL here before using the application
 const WEBHOOK_CONFIG = {
-    // REPLACE THIS with your actual webhook URL from n8n:
-    url: 'https://n8n.macandcode.cloud/webhook/YOUR_WEBHOOK_ID', // UPDATE THIS!
+    // ✅ PRODUCTION WEBHOOK: Ready for production deployment
+    url: 'https://n8n.macandcode.cloud/webhook/82689e0c-b8f4-4932-80ec-2f628a49cbbf',
     
-    // After creating a webhook in n8n, you'll get a URL like:
-    // 'https://n8n.macandcode.cloud/webhook/a1b2c3d4-e5f6-7890-abcd-ef1234567890'
-    // Replace YOUR_WEBHOOK_ID above with your actual webhook ID
+    // This is the production webhook URL that will be used on your EC2 server
 };
 
 class GitHubAutomationHub {
