@@ -4,7 +4,7 @@
 // ================
 // Set your n8n webhook URL here before using the application
 const WEBHOOK_CONFIG = {
-    url: 'https://n8n.macandcode.cloud:5678/webhook/06066ccf-62c4-49a7-875b-7871b60992d8',
+    url: 'https://n8n.macandcode.cloud/webhook/06066ccf-62c4-49a7-875b-7871b60992d8',
     // Example: 'https://n8n.yourcompany.com/webhook/github-automation'
     // Example: 'http://localhost:5678/webhook/github-automation'
 };
